@@ -12,7 +12,7 @@ function TaskList() {
   }, []);
 
   return (
-    <div className="p-6">
+    <div className="p-6 h-screen">
       <h2 className="text-2xl font-bold mb-4">Task List</h2>
       {tasks.length === 0 ? (
         <p className="text-gray-600">No tasks available</p>

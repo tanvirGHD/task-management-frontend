@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from "@react-forked/dnd";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 
-//  Main Component
 function TaskBoard() {
   const [tasks, setTasks] = useState([]);
   const [editTask, setEditTask] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5001/tasks")
-      .then(response => setTasks(response.data))
-      .catch(error => console.error("Error fetching tasks:", error));
+    axios
+      .get("http://localhost:5001/tasks")
+      .then((response) => setTasks(response.data))
+      .catch((error) => console.error("Error fetching tasks:", error));
   }, []);
 
   const onDragEnd = async (result) => {
@@ -27,7 +27,9 @@ function TaskBoard() {
     setTasks(updatedTasks);
 
     try {
-      await axios.put(`http://localhost:5001/tasks/${movedTask._id}`, { category: movedTask.category });
+      await axios.put(`http://localhost:5001/tasks/${movedTask._id}`, {
+        category: movedTask.category,
+      });
     } catch (error) {
       console.error("Failed to update task category:", error);
     }
@@ -39,13 +41,11 @@ function TaskBoard() {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios.delete(`http://localhost:5001/tasks/${id}`);
-        setTasks(tasks.filter(task => task._id !== id));
+        setTasks(tasks.filter((task) => task._id !== id));
         Swal.fire("Deleted!", "Your task has been deleted.", "success");
       }
     });
@@ -59,7 +59,7 @@ function TaskBoard() {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:5001/tasks/${editTask._id}`, editTask);
-      setTasks(tasks.map(task => (task._id === editTask._id ? { ...editTask } : task)));
+      setTasks(tasks.map((task) => (task._id === editTask._id ? { ...editTask } : task)));
       setEditTask(null);
     } catch (error) {
       console.error("Failed to update task:", error);
@@ -67,39 +67,26 @@ function TaskBoard() {
   };
 
   return (
-    <div className="p-5  min-h-screen">
+    <div className="p-5 h-screen">
       <h1 className="text-3xl font-bold text-center mb-5">Task Management</h1>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3  gap-5">
-          {['To-Do', 'In Progress', 'Done'].map((category) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {["To-Do", "In Progress", "Done"].map((category) => (
             <Droppable key={category} droppableId={category} type="TASK">
               {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  className="bg-white shadow-lg p-5 w-80 rounded-lg"
-                >
+                <div ref={provided.innerRef} {...provided.droppableProps} className="bg-white shadow-lg p-5 w-80 rounded-lg min-h-[200px]">
                   <h2 className="text-xl font-semibold mb-3 text-center">{category}</h2>
-                  {tasks.filter(task => task.category === category).map((task, index) => (
+                  {tasks.filter((task) => task.category === category).map((task, index) => (
                     <Draggable key={task._id} draggableId={task._id} index={index}>
                       {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className="bg-gray-200 p-3 mb-2 rounded-md flex justify-between items-center"
-                        >
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="bg-gray-200 p-3 mb-2 rounded-md flex justify-between items-center">
                           <div>
                             <h3 className="font-bold">{task.title}</h3>
                             <p>{task.description}</p>
                           </div>
                           <div className="flex gap-2">
-                            <button onClick={() => handleEditClick(task)} className="text-blue-500">
-                              <FaEdit />
-                            </button>
-                            <button onClick={() => deleteTask(task._id)} className="text-red-500">
-                              <FaTrash />
-                            </button>
+                            <button onClick={() => handleEditClick(task)} className="text-blue-500"><FaEdit /></button>
+                            <button onClick={() => deleteTask(task._id)} className="text-red-500"><FaTrash /></button>
                           </div>
                         </div>
                       )}
@@ -112,31 +99,15 @@ function TaskBoard() {
           ))}
         </div>
       </DragDropContext>
-      
+
       {editTask && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-5 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-3">Edit Task</h2>
             <form onSubmit={handleUpdateTask}>
-              <input 
-                type="text" 
-                value={editTask.title} 
-                onChange={(e) => setEditTask({...editTask, title: e.target.value})} 
-                className="border p-2 w-full mb-2" 
-                placeholder="Title" 
-              />
-              <input 
-                type="text" 
-                value={editTask.description} 
-                onChange={(e) => setEditTask({...editTask, description: e.target.value})} 
-                className="border p-2 w-full mb-2" 
-                placeholder="Description" 
-              />
-              <select 
-                value={editTask.category} 
-                onChange={(e) => setEditTask({...editTask, category: e.target.value})} 
-                className="border p-2 w-full mb-2"
-              >
+              <input type="text" value={editTask.title} onChange={(e) => setEditTask({ ...editTask, title: e.target.value })} className="border p-2 w-full mb-2" placeholder="Title" />
+              <input type="text" value={editTask.description} onChange={(e) => setEditTask({ ...editTask, description: e.target.value })} className="border p-2 w-full mb-2" placeholder="Description" />
+              <select value={editTask.category} onChange={(e) => setEditTask({ ...editTask, category: e.target.value })} className="border p-2 w-full mb-2">
                 <option value="To-Do">To-Do</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Done">Done</option>

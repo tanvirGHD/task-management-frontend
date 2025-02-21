@@ -49,7 +49,9 @@ function TaskForm({ onTaskAdded }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mt-28 mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="mt-28 h-screen">
+      <h2 className="text-pink-500 text-3xl font-bold text-center">Task Add</h2>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
       <div className="mb-4">
         <input
           type="text"
@@ -105,6 +107,7 @@ function TaskForm({ onTaskAdded }) {
         Go to Task Board
       </button>
     </form>
+    </div>
   );
 }
 
