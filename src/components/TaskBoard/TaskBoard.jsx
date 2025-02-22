@@ -68,7 +68,7 @@ function TaskBoard() {
 
   return (
     <div className="p-5 h-screen">
-      <h1 className="text-3xl font-bold text-center mb-5">Task Management</h1>
+      <h1 className="text-3xl font-bold text-[#3388C5] text-center mb-5">Task Management</h1>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {["To-Do", "In Progress", "Done"].map((category) => (

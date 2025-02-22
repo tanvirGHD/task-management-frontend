@@ -25,13 +25,13 @@ const Navbar = () => {
 
       {/* Navbar */}
       <div
-        className={`fixed left-0 top-0 h-screen w-64 bg-[#CAE4F7] shadow-lg p-4 flex flex-col justify-between transform transition-transform duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 h-screen w-64 bg-[#3388c5] text-white shadow-lg p-4 flex flex-col justify-between transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
         {/* Logo or App Name */}
         <h1 className="text-xl font-bold mb-6 mt-7 flex items-center">
-          <FaHome className="mr-2" /> Task Management
+          <FaHome className="mr-2" /> Taskify
         </h1>
 
         {/* Navigation Links */}
