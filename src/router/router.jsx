@@ -4,6 +4,9 @@ import TaskBoard from "../components/TaskBoard/TaskBoard";
 import TaskForm from "../components/TaskForm/TaskForm";
 import TaskList from "../components/TaskList/TaskList";
 import Home from "../components/Home/Home";
+import AboutUs from "../components/About/AboutUs";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Login from "../components/login/Login";
 
 
 
@@ -19,15 +22,23 @@ const router = createBrowserRouter([
           },
           {
                path: 'taskBoard',
-               element: <TaskBoard></TaskBoard>
+               element: <PrivateRoute><TaskBoard></TaskBoard></PrivateRoute>
           },
           {
                path: 'taskFrom',
-               element: <TaskForm></TaskForm>
+               element: <PrivateRoute><TaskForm></TaskForm></PrivateRoute>
           },
           {
                path: 'taskList',
-               element: <TaskList></TaskList>
+               element: <PrivateRoute><TaskList></TaskList></PrivateRoute>
+          },
+          {
+               path: 'about',
+               element: <AboutUs></AboutUs>
+          },
+          {
+               path: 'protect',
+               element: <Login></Login>
           }
         ]
     },

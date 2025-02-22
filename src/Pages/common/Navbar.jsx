@@ -37,6 +37,13 @@ const Navbar = () => {
         {/* Navigation Links */}
         <nav className="space-y-3">
           <Link
+            to="/"
+            className="flex items-center text-lg hover:text-blue-500 transition-colors duration-200"
+            onClick={toggleMenu}
+          >
+            <FaTasks className="mr-2" /> Home
+          </Link>
+          <Link
             to="/taskBoard"
             className="flex items-center text-lg hover:text-blue-500 transition-colors duration-200"
             onClick={toggleMenu}
@@ -56,6 +63,13 @@ const Navbar = () => {
             onClick={toggleMenu}
           >
             <FaList className="mr-2" /> Task List
+          </Link>
+          <Link
+            to="/about"
+            className="flex items-center text-lg hover:text-blue-500 transition-colors duration-200"
+            onClick={toggleMenu}
+          >
+            <FaList className="mr-2" /> About Us
           </Link>
         </nav>
 

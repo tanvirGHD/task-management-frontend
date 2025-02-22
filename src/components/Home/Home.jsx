@@ -41,18 +41,35 @@ const Home = () => {
   return (
     <div className="text-gray-800">
       {/* Hero Section */}
-      <section className="bg-[#3388c5] py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold text-white mb-4">Organize Your Tasks, Boost Your Productivity</h1>
-          <p className="text-xl text-blue-100 mb-8">Simple, Intuitive, and Powerful Task Management Tool for Teams and Individuals.</p>
-          <div className="space-x-4">
-          <Link to='/taskFrom'>
-            <a  className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Get Started for Free</a>
-            </Link>
-            <a href="#" className="bg-transparent border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600">Learn More</a>
-          </div>
+      <section className="bg-[#3388c5] py-12 md:py-20">
+      <div className="container mx-auto px-4 sm:px-6 text-center">
+        {/* Heading */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          Organize Your Tasks, Boost Your Productivity
+        </h1>
+
+        {/* Subheading */}
+        <p className="text-lg sm:text-xl text-blue-100 mb-6 md:mb-8">
+          Simple, Intuitive, and Powerful Task Management Tool for Teams and Individuals.
+        </p>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <Link
+            to="/taskFrom"
+            className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300"
+          >
+            Get Started for Free
+          </Link>
+          <a
+            href="#"
+            className="bg-transparent border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300"
+          >
+            Learn More
+          </a>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Key Features Section */}
       <section className="py-20">
