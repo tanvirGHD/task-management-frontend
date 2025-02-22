@@ -31,7 +31,7 @@ function TaskForm({ onTaskAdded }) {
 
     setIsSubmitting(true);
     try {
-      const response = await axios.post("http://localhost:5001/tasks", task);
+      const response = await axios.post("https://task-manager-backend-nine-psi.vercel.app/tasks", task);
       onTaskAdded(response.data);
       setTask({ title: "", description: "", category: "To-Do" });
 

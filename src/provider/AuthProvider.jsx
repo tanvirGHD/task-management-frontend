@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
           if (currentUser) {
             setUser(currentUser);
-            await axios.post("http://localhost:5001/users", {
+            await axios.post("https://task-manager-backend-nine-psi.vercel.app/users", {
               uid: currentUser.uid,
               email: currentUser.email,
               displayName: currentUser.displayName

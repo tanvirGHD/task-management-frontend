@@ -6,7 +6,7 @@ function TaskList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/tasks")
+      .get("https://task-manager-backend-nine-psi.vercel.app/tasks")
       .then((response) => setTasks(response.data))
       .catch((error) => console.error("Error fetching tasks:", error));
   }, []);

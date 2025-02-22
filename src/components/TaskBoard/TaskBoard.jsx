@@ -10,7 +10,7 @@ function TaskBoard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/tasks")
+      .get("https://task-manager-backend-nine-psi.vercel.app/tasks")
       .then((response) => setTasks(response.data))
       .catch((error) => console.error("Error fetching tasks:", error));
   }, []);
@@ -27,7 +27,7 @@ function TaskBoard() {
     setTasks(updatedTasks);
 
     try {
-      await axios.put(`http://localhost:5001/tasks/${movedTask._id}`, {
+      await axios.put(`https://task-manager-backend-nine-psi.vercel.app/tasks/${movedTask._id}`, {
         category: movedTask.category,
       });
     } catch (error) {
@@ -44,7 +44,7 @@ function TaskBoard() {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:5001/tasks/${id}`);
+        await axios.delete(`https://task-manager-backend-nine-psi.vercel.app/tasks/${id}`);
         setTasks(tasks.filter((task) => task._id !== id));
         Swal.fire("Deleted!", "Your task has been deleted.", "success");
       }
@@ -58,7 +58,7 @@ function TaskBoard() {
   const handleUpdateTask = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5001/tasks/${editTask._id}`, editTask);
+      await axios.put(`https://task-manager-backend-nine-psi.vercel.app/tasks/${editTask._id}`, editTask);
       setTasks(tasks.map((task) => (task._id === editTask._id ? { ...editTask } : task)));
       setEditTask(null);
     } catch (error) {
